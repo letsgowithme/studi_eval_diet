@@ -23,7 +23,8 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 50; $i++) {
             $ingredient = new Ingredient();
             $ingredient->setName($this->faker->word())
-                ->setAllergen(random_int(min: 0, max: 1));
+                       ->setAllergen($this->faker->word());
+
             $manager->persist($ingredient);
 
         }

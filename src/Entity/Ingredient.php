@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
+#[UniqueEntity('name')]
 class Ingredient
 {
     #[ORM\Id]
@@ -21,7 +23,7 @@ class Ingredient
 
     #[ORM\Column]
     #[Assert\NotBlank()]
-    private ?bool $allergen = null;
+    private ?string $allergen = null;
 
     public function getId(): ?int
     {
@@ -39,16 +41,17 @@ class Ingredient
 
         return $this;
     }
-
-    public function isAllergen(): ?bool
+    public function getAllergen(): ?string
     {
         return $this->allergen;
     }
 
-    public function setAllergen(bool $allergen): self
+    public function setAllergen(string $allergen): self
     {
         $this->allergen = $allergen;
 
         return $this;
     }
+
+
 }
